@@ -1,0 +1,1403 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>소담한 디저트 - Artisanal Dessert & Slow Living</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        "surface": "#fcf9f8",
+                        "surface-dim": "#dcd9d9",
+                        "surface-bright": "#fcf9f8",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f6f3f2",
+                        "surface-container": "#f0eded",
+                        "surface-container-high": "#eae7e7",
+                        "surface-container-highest": "#e4e2e1",
+                        "on-surface": "#1b1c1c",
+                        "on-surface-variant": "#47483c",
+                        "inverse-surface": "#303030",
+                        "inverse-on-surface": "#f3f0f0",
+                        "outline": "#77786b",
+                        "outline-variant": "#c8c7b8",
+                        "surface-tint": "#5a632e",
+                        "primary": "#343c0a",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#4b5320",
+                        "on-primary-container": "#bdc787",
+                        "inverse-primary": "#c3cc8c",
+                        "secondary": "#5f5e5b",
+                        "on-secondary": "#ffffff",
+                        "secondary-container": "#e5e2dd",
+                        "on-secondary-container": "#656461",
+                        "tertiary": "#423628",
+                        "on-tertiary": "#ffffff",
+                        "tertiary-container": "#5a4c3e",
+                        "on-tertiary-container": "#d1bdab",
+                        "error": "#ba1a1a",
+                        "on-error": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-error-container": "#93000a",
+                        "primary-fixed": "#dfe8a6",
+                        "primary-fixed-dim": "#c3cc8c",
+                        "on-primary-fixed": "#191e00",
+                        "on-primary-fixed-variant": "#434b18",
+                        "secondary-fixed": "#e5e2dd",
+                        "secondary-fixed-dim": "#c9c6c2",
+                        "on-secondary-fixed": "#1c1c19",
+                        "on-secondary-fixed-variant": "#474743",
+                        "tertiary-fixed": "#f4dfcb",
+                        "tertiary-fixed-dim": "#d7c3b0",
+                        "on-tertiary-fixed": "#241a0e",
+                        "on-tertiary-fixed-variant": "#524436",
+                        "background": "#fcf9f8",
+                        "on-background": "#1b1c1c",
+                        "surface-variant": "#e4e2e1"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.5rem",
+                        "sm": "0.25rem",
+                        "md": "0.75rem",
+                        "lg": "1rem",
+                        "xl": "1.5rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "base": "8px",
+                        "container-max": "1200px",
+                        "gutter": "24px",
+                        "margin-mobile": "20px",
+                        "section-gap": "80px"
+                    },
+                    fontFamily: {
+                        sans: ["'Plus Jakarta Sans'", "sans-serif"],
+                        serif: ["'Noto Serif KR'", "serif"]
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: #fcf9f8;
+            color: #1b1c1c;
+        }
+        .font-noto {
+            font-family: 'Noto Serif KR', serif;
+        }
+        .parallax {
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        /* Custom subtle scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #fcf9f8;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #c8c7b8;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #77786b;
+        }
+    </style>
+</head>
+<body class="antialiased selection:bg-primary-container selection:text-on-primary-container">
+
+    <!-- Toast Notification Banner -->
+    <div id="toast" class="fixed top-24 left-1/2 transform -translate-x-1/2 z-[100] bg-primary text-on-primary px-6 py-3 rounded-lg shadow-xl flex items-center gap-3 opacity-0 pointer-events-none transition-all duration-300 transform translate-y-[-10px]">
+        <span class="material-symbols-outlined text-xl text-primary-fixed-dim" id="toast-icon">check_circle</span>
+        <span class="font-body-md text-sm md:text-base" id="toast-message">알림 메시지</span>
+    </div>
+
+    <!-- Top Sticky AppBar -->
+    <header class="fixed top-0 w-full z-50 bg-[#fcf9f8]/90 backdrop-blur-md flex justify-between items-center px-5 py-4 transition-all duration-300 border-b border-outline-variant/20 shadow-sm">
+        <button id="mobile-menu-btn" aria-label="메뉴 열기" class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+            <span class="material-symbols-outlined text-2xl font-light">menu</span>
+        </button>
+        
+        <a href="#" class="flex items-center gap-3 select-none">
+            <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary font-serif font-semibold text-sm">소</div>
+            <span class="font-serif text-lg md:text-xl font-medium tracking-tight text-primary">소담한 디저트</span>
+        </a>
+
+        <div class="flex items-center gap-4">
+            <!-- Navigation tags for larger screen -->
+            <nav class="hidden md:flex items-center gap-6 mr-4">
+                <a href="#concept" class="text-sm font-semibold tracking-wide text-secondary hover:text-primary transition-all">브랜드 스토리</a>
+                <a href="#signature" class="text-sm font-semibold tracking-wide text-secondary hover:text-primary transition-all">시그니처 메뉴</a>
+                <a href="#menu-explorer" class="text-sm font-semibold tracking-wide text-secondary hover:text-primary transition-all">전체 메뉴</a>
+                <a href="#reservation" class="text-sm font-semibold tracking-wide text-secondary hover:text-primary transition-all">공간 대여 및 예약</a>
+                <a href="#guestbook" class="text-sm font-semibold tracking-wide text-secondary hover:text-primary transition-all">방명록</a>
+            </nav>
+            <button id="open-cart-btn" aria-label="장바구니 열기" class="relative text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+                <span class="material-symbols-outlined text-2xl font-light">shopping_bag</span>
+                <span id="cart-counter" class="absolute -top-1 -right-1 w-5 h-5 bg-error text-on-error rounded-full text-xs font-bold flex items-center justify-center scale-0 transition-transform duration-300">0</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Drawer: Mobile Navigation menu on left click -->
+    <div id="mobile-nav-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-all duration-500">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 transition-opacity duration-500 drawer-backdrop"></div>
+        <div class="absolute top-0 left-0 w-80 max-w-xs h-full bg-surface shadow-2xl flex flex-col p-6 transform -translate-x-full transition-transform duration-500 drawer-content">
+            <div class="flex justify-between items-center mb-10">
+                <span class="font-serif text-lg font-medium text-primary">소담한 디저트</span>
+                <button id="close-mobile-nav" class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+                    <span class="material-symbols-outlined text-2xl">close</span>
+                </button>
+            </div>
+            <nav class="flex flex-col gap-6">
+                <a href="#concept" class="text-base font-semibold tracking-wide text-on-surface hover:text-primary flex items-center gap-3">
+                    <span class="material-symbols-outlined font-light text-xl">auto_stories</span> 브랜드 스토리
+                </a>
+                <a href="#signature" class="text-base font-semibold tracking-wide text-on-surface hover:text-primary flex items-center gap-3">
+                    <span class="material-symbols-outlined font-light text-xl">star</span> 시그니처 메뉴
+                </a>
+                <a href="#menu-explorer" class="text-base font-semibold tracking-wide text-on-surface hover:text-primary flex items-center gap-3">
+                    <span class="material-symbols-outlined font-light text-xl">restaurant_menu</span> 전체 메뉴
+                </a>
+                <a href="#reservation" class="text-base font-semibold tracking-wide text-on-surface hover:text-primary flex items-center gap-3">
+                    <span class="material-symbols-outlined font-light text-xl">event_seat</span> 공간 대여 및 예약
+                </a>
+                <a href="#guestbook" class="text-base font-semibold tracking-wide text-on-surface hover:text-primary flex items-center gap-3">
+                    <span class="material-symbols-outlined font-light text-xl">rate_review</span> 소담 방명록
+                </a>
+                <a href="#maps" class="text-base font-semibold tracking-wide text-on-surface hover:text-primary flex items-center gap-3">
+                    <span class="material-symbols-outlined font-light text-xl">pin_drop</span> 오시는 길
+                </a>
+            </nav>
+            <div class="mt-auto pt-6 border-t border-outline-variant/30 flex flex-col gap-2">
+                <span class="text-xs text-secondary font-medium">영업일: 수요일 - 일요일 (월, 화 휴무)</span>
+                <span class="text-xs text-secondary font-medium">운영 시간: 11:00 - 21:00</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Drawer: Order Bag / Shopping Cart Drawer on right click -->
+    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-all duration-500">
+        <div class="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 transition-opacity duration-500 drawer-backdrop"></div>
+        <div class="absolute top-0 right-0 w-full md:w-[450px] h-full bg-surface shadow-2xl flex flex-col transform translate-x-full transition-transform duration-500 drawer-content">
+            <!-- Cart Header -->
+            <div class="px-6 py-5 border-b border-outline-variant/30 flex justify-between items-center bg-surface-container-lowest">
+                <div class="flex items-center gap-2">
+                    <span class="material-symbols-outlined text-primary text-2xl font-light">shopping_bag</span>
+                    <span class="font-serif text-lg font-medium text-primary">담은 바구니</span>
+                </div>
+                <button id="close-cart" class="text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+                    <span class="material-symbols-outlined text-2xl">close</span>
+                </button>
+            </div>
+
+            <!-- Cart Body -->
+            <div id="cart-items-container" class="flex-1 overflow-y-auto p-6 flex flex-col gap-6">
+                <!-- Dynamically generated elements will go here -->
+                <div id="empty-cart-state" class="flex flex-col items-center justify-center h-full text-center gap-4">
+                    <span class="material-symbols-outlined text-6xl text-outline-variant font-light">shopping_basket</span>
+                    <p class="font-serif text-lg text-secondary">바구니가 비어 있습니다.</p>
+                    <p class="font-body-md text-sm text-on-surface-variant">소담의 정성껏 준비한 시그니처 메뉴들을 담아보세요.</p>
+                    <button class="mt-4 px-6 py-2 bg-primary text-on-primary rounded-lg text-sm font-semibold tracking-wide hover:bg-primary-container transition-all" onclick="document.querySelector('#close-cart').click(); window.location.href='#signature';">
+                        메뉴 구경하기
+                    </button>
+                </div>
+            </div>
+
+            <!-- Order / Checkout Area -->
+            <div id="cart-checkout-section" class="border-t border-outline-variant/30 p-6 bg-surface-container-lowest hidden select-none">
+                <!-- Takeout / Dining Selection -->
+                <div class="flex bg-surface-container rounded-lg p-1 gap-1 mb-4">
+                    <button id="order-type-dine" class="flex-1 text-center py-2 text-sm font-semibold rounded-md transition-all bg-surface shadow-sm text-primary">
+                        매장 식사 (Dine-in)
+                    </button>
+                    <button id="order-type-take" class="flex-1 text-center py-2 text-sm font-semibold rounded-md transition-all text-secondary">
+                        포장 수령 (Takeout)
+                    </button>
+                </div>
+
+                <div class="flex justify-between items-center mb-6">
+                    <span class="font-body-md text-secondary font-medium">총 계산 금액</span>
+                    <span id="cart-total-price" class="font-serif text-xl md:text-2xl font-bold text-primary">₩ 0</span>
+                </div>
+
+                <button id="checkout-btn" class="w-full bg-primary text-on-primary py-4 rounded-lg font-serif font-bold tracking-wide hover:bg-primary-container transition-all shadow-md flex items-center justify-center gap-2">
+                    <span class="material-symbols-outlined text-xl">shopping_cart_checkout</span> 주문 접수 및 시뮬레이션
+                </button>
+                <p class="text-[11px] text-on-surface-variant text-center mt-3 leading-relaxed">
+                    * 이 주문은 시뮬레이션입니다. 실제 결제나 실물 발송은 일어나지 않습니다.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN PAGE CONTAINER -->
+    <main class="w-full pt-[72px] flex flex-col items-center">
+
+        <!-- Hero Stage with Parallax Slower Background -->
+        <section class="w-full h-[95s_vh] relative flex items-center justify-center overflow-hidden parallax" style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAtTBjMfaIfeo8CgpN73VtzUQ1RjS06jRIyvFUKB8EYF85xSV1eQBMYcviTx4uNqGw9satgTJAMYW5R-7KfDeebUwn76gI-AuK6IgFYSmY1XC40YBYN5Z3mcpZVhTY510ud6sDeLrJNzxTP5Qzylo7E0erMUOaD5pNJpwpq1-m6k-NYoxoHyh-lCdH8ABf_EmVjBmdCZEUKVBHP3AmzrMepPqDEtBU8ytFP39yo3ImpeQrlhQqhjjKSUVxYO8IAuJvPjygJSur2z7bD');">
+            <!-- Warm dark cover to ensure contrast text and luxury feeling -->
+            <div class="absolute inset-0 bg-black/35 z-0"></div>
+            
+            <div class="relative z-10 text-center px-4 flex flex-col items-center gap-4">
+                <div class="w-16 h-16 bg-[#fcf9f8]/10 backdrop-blur-md rounded-full flex items-center justify-center mb-2 border border-[#fcf9f8]/20 animate-pulse">
+                    <span class="material-symbols-outlined text-white text-3xl font-light">local_cafe</span>
+                </div>
+                <h1 class="font-serif text-4xl md:text-5xl lg:text-6xl text-white font-medium tracking-tight leading-tight w-full drop-shadow-md">
+                    소담한 디저트
+                </h1>
+                <p class="font-serif text-lg md:text-xl text-[#f6f3f2]/95 tracking-wide max-w-lg mx-auto font-light leading-relaxed">
+                    Artisanal Dessert &amp; Slow Living
+                </p>
+                <div class="h-[1px] w-24 bg-white/30 my-4"></div>
+                <p class="text-xs md:text-sm text-surface-variant font-light tracking-widest uppercase">
+                    Quiet Luxury • Crafted Fresh Everyday
+                </p>
+                
+                <a href="#signature" class="mt-8 px-8 py-3 bg-white text-primary rounded-lg text-sm font-semibold tracking-wider hover:bg-primary-fixed hover:-translate-y-[2px] transition-all duration-300 shadow-md transform flex items-center gap-2 select-none">
+                    시그니처 만나보기 <span class="material-symbols-outlined text-sm font-bold">arrow_forward</span>
+                </a>
+            </div>
+            
+            <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce z-10 flex flex-col items-center">
+                <span class="text-[11px] text-white/50 tracking-widest mb-1 italic">scroll</span>
+                <span class="material-symbols-outlined text-white/70">keyboard_double_arrow_down</span>
+            </div>
+        </section>
+
+        <!-- Concept & Slogan section -->
+        <section id="concept" class="w-full max-w-container-max px-5 py-20 flex flex-col items-center text-center">
+            <div class="w-[1px] h-16 bg-outline-variant mb-10 opacity-60"></div>
+            <h2 class="font-serif text-3xl md:text-4xl text-primary font-medium mb-6">Our Concept</h2>
+            <div class="flex flex-col gap-5 text-on-surface-variant max-w-2xl text-center leading-relaxed">
+                <p class="font-serif text-xl text-primary font-light mb-2">"도심 속 작은 쉼터, 소담(素淡)"</p>
+                <p class="font-body-lg text-base md:text-lg">
+                    매일 아침 새벽, 소담의 키친에서는 신선한 유기농 밀가루와 뉴질랜드 천연 앵커 버터의 고소한 향으로 하루가 시작됩니다.
+                </p>
+                <p class="font-body-lg text-base md:text-lg">
+                    한 입 베어 무는 순간 느껴지는 손 끝의 정성, 계절의 온전한 수확을 담은 시럽과 신선한 허브 음료까지. 소담은 단순히 디저트를 파는 것이 아닌, 당신의 바쁜 하루에 잠시 멈춤의 가치를 전하고자 합니다.
+                </p>
+            </div>
+            
+            <!-- Bento style key facts grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full mt-16 max-w-4xl">
+                <div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 text-center flex flex-col items-center">
+                    <span class="material-symbols-outlined text-primary text-4xl mb-4 font-light">temp_chef</span>
+                    <h3 class="font-serif font-medium text-lg mb-2 text-primary">당일 생산 당일 판매</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">방부제와 색소 없이 자연 본연의 건강한 원료만 사용하여 매일 아침 구워냅니다.</p>
+                </div>
+                <div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 text-center flex flex-col items-center">
+                    <span class="material-symbols-outlined text-primary text-4xl mb-4 font-light">filter_vintage</span>
+                    <h3 class="font-serif font-medium text-lg mb-2 text-primary">계절 맞춤 에센스</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">자연의 흐름을 반영하여 가장 향긋한 제철 과일과 꽃을 얹은 다채로운 디저트.</p>
+                </div>
+                <div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/10 text-center flex flex-col items-center">
+                    <span class="material-symbols-outlined text-primary text-4xl mb-4 font-light">spa</span>
+                    <h3 class="font-serif font-medium text-lg mb-2 text-primary">조용한 럭셔리 휴식</h3>
+                    <p class="text-sm text-on-surface-variant leading-relaxed">아날로그 사운드, 따뜻한 우드와 미니멀한 공간 속에서 완벽한 프라이버시가 주어집니다.</p>
+                </div>
+            </div>
+            
+            <div class="w-[1px] h-16 bg-outline-variant mt-16 opacity-60"></div>
+        </section>
+
+        <!-- Signature Bento Grid -->
+        <section id="signature" class="w-full bg-surface-container-low py-20 px-5 flex flex-col items-center">
+            <div class="w-full max-w-container-max flex flex-col items-center">
+                <h2 class="font-serif text-3xl md:text-4xl text-primary font-medium mb-4 text-center">Signature Menu</h2>
+                <p class="text-sm md:text-base text-on-surface-variant text-center max-w-md mb-12">
+                    소담한 디저트의 장인의 고집이 깃든 세 가지 대표 시그니처를 고유의 촉감과 함께 감상해보세요.
+                </p>
+                
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-6 w-full">
+                    <!-- Drink Card (Matcha Cream Latte) -->
+                    <div onclick="openItemDetail('drink-matcha')" class="md:col-span-8 group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 h-[380px] flex flex-col justify-end p-8 cursor-pointer select-none">
+                        <!-- Image with referrerpolicy element -->
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuD_5a_1fkzryLtkFExssgW3AVv7oqR3sxu58gS5HNJ0H2Z9w5w5wjaEAG9Q-IkuiRUpuTHTnQWxnIOpsrJTHG6z6NUjLSbB7IbEpaWp-PY9v2TtUaJ_EWLJrOroXMn1tDnfy_fzXyB8eGGPAnJIn9XKRZem6iWuDmJX2pkPvhFpYvi3VWoKtdQBdRc4lIbhtlMIWpoZ_9RTxGCecYUy9i8fBhJb8ZXG2i11HEsOZO3bX6u8fDpTORN9ZETKUNhXMCb81dGByJ5c8PM" referrerpolicy="no-referrer" alt="Jeju Matcha Cream Latte" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent group-hover:from-black/90 transition-all duration-300"></div>
+                        <div class="relative z-10 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="inline-block px-3 py-1 bg-primary text-primary-fixed text-[11px] font-bold tracking-widest uppercase rounded-full mb-3 shadow-md">음료 • DRINK</span>
+                            <div class="flex justify-between items-end gap-3 flex-wrap">
+                                <div>
+                                    <h3 class="font-serif text-2xl md:text-3xl text-white mb-2 font-medium">제주 말차 크림 라떼</h3>
+                                    <p class="text-sm text-surface-variant font-light max-w-md">제주 화산토에서 자란 유기농 어린 찻잎만을 맷돌로 곱게 갈아, 매장에서 직접 휘핑한 신선한 생크림을 올렸습니다.</p>
+                                </div>
+                                <span class="font-serif text-xl font-bold text-primary-fixed-dim shrink-0">₩ 7,500</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Food Card (Seasonal Toast) -->
+                    <div onclick="openItemDetail('food-toast')" class="md:col-span-4 group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 h-[380px] flex flex-col justify-end p-8 cursor-pointer select-none">
+                        <!-- Image with referrerpolicy element -->
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuAqpwG69Jc9cJEH7de9f6oQrSaz90itXKFnDObEoOP1bgHz8aVkC6cN0jmOhKCp10fSu27BUMgeP70OmrHH3lPEhJ7kx2HjTJZg5RKMctcnG48lI0h0FnFrUk34Ec92OGifk5oPN9kOVSrFHP7aJKijG57YUYs-qLWGaMTSD_-LfVRngyEB1eT7sZDmzRh4T-K9qOs0gXnjlhz1YX5wG5K1PLJERr-MG11lCnnXx1iVWcx7xx8LWISvghR3gVNPhw4_1vWEbBAMr09W" referrerpolicy="no-referrer" alt="Seasonal fruit sourdough toast" class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/85 via-black/35 to-transparent group-hover:from-black/90 transition-all duration-300"></div>
+                        <div class="relative z-10 translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
+                            <span class="inline-block px-3 py-1 bg-primary text-primary-fixed text-[11px] font-bold tracking-widest uppercase rounded-full mb-3 shadow-md">브런치 • BRUNCH</span>
+                            <div class="flex justify-between items-end gap-3 flex-wrap">
+                                <div>
+                                    <h3 class="font-serif text-2xl text-white mb-2 font-medium">계절 과일 사워도우 토스트</h3>
+                                </div>
+                                <span class="font-serif text-xl font-bold text-primary-fixed-dim shrink-0">₩ 8,800</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Dessert Card (Flower Cake) -->
+                    <div onclick="openItemDetail('dessert-cake')" class="md:col-span-12 group relative overflow-hidden rounded-xl shadow-sm hover:shadow-xl transition-all duration-500 h-[450px] flex flex-col justify-end p-8 md:p-12 cursor-pointer select-none">
+                        <!-- Image with referrerpolicy element -->
+                        <img src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1HdaR43j7s1xqgWlMBg3wcD2bMFecBVbliEDVUkHLyrmBqcmDYi7QCx6XvxFiR9pPC4bAhLNtn38m0ymtipoBMQA7N1IrqdtJeCFJPUroZKQE-y4szBWMdCkKHUdrZXPMcIEAMmIy-rVQTGvXH28Xzc2dYryfQphkD7DPVMMz4r5tRD3UNawFfdHQRKFoBK4LjV5gwHDvZJWiqaxfY76Ii6N57Kuc1WIeqL40pWJdhjxZ1IVxLpSeidQi55Bo65faon5HYFZY2q_J" referrerpolicy="no-referrer" alt="Signature flower luxury cake" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-1000 ease-out" />
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 To-transparent group-hover:from-black/95 transition-all duration-300"></div>
+                        <div class="relative z-10 flex flex-col md:flex-row md:items-end justify-between w-full gap-6">
+                            <div>
+                                <span class="inline-block px-3 py-1 bg-primary text-primary-fixed text-[11px] font-bold tracking-widest uppercase rounded-full mb-3 shadow-md">디저트 • CAKERY</span>
+                                <h3 class="font-serif text-3xl md:text-4xl text-white mb-3 font-medium">시그니처 플라워 우유 케이크</h3>
+                                <p class="text-sm md:text-base text-surface-variant font-light max-w-xl">
+                                    계절별 식용 생화와 매장에서 직접 제조한 촉촉한 마스카포네 시트, 유기농 설탕과 생우유 크림의 품격 있는 풍미. 순수한 원료의 가치를 그대로 느낄 수 있는 대표 케이크입니다.
+                                </p>
+                            </div>
+                            <div class="flex flex-col items-start md:items-end gap-3 shrink-0">
+                                <span class="font-serif text-2xl font-bold text-primary-fixed-dim">₩ 14,000</span>
+                                <button class="px-8 py-3 bg-white hover:bg-primary-fixed hover:-translate-y-1 text-primary font-bold rounded-lg text-sm tracking-wide shadow-md transition-all self-stretch md:self-auto text-center" onclick="event.stopPropagation(); window.location.href='#menu-explorer';">
+                                    다른 디저트 더보기
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Menu Explorer & Live Filter Section -->
+        <section id="menu-explorer" class="w-full max-w-container-max px-5 py-24">
+            <h2 class="font-serif text-3xl md:text-4xl text-primary font-medium mb-2 text-center">Our Whole Menu</h2>
+            <p class="text-sm md:text-base text-on-surface-variant text-center mb-8">취향이나 알레르기 유발 유무에 맞춰 실시간으로 메뉴판을 필터링해 보세요.</p>
+            
+            <!-- Category and search tabs combo -->
+            <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-12 border-b border-outline-variant/30 pb-6">
+                <!-- Swappable Categories folders -->
+                <div class="flex flex-wrap gap-2 justify-center w-full md:w-auto">
+                    <button onclick="filterMenu('all')" id="cat-all" class="px-5 py-2 rounded-full text-xs md:text-sm font-semibold transition-all bg-primary text-on-primary">전체 메뉴</button>
+                    <button onclick="filterMenu('drink')" id="cat-drink" class="px-5 py-2 rounded-full text-xs md:text-sm font-semibold transition-all bg-surface-container text-secondary hover:text-primary">음료 (Drinks)</button>
+                    <button onclick="filterMenu('dessert')" id="cat-dessert" class="px-5 py-2 rounded-full text-xs md:text-sm font-semibold transition-all bg-surface-container text-secondary hover:text-primary">디저트 (Dessert)</button>
+                    <button onclick="filterMenu('brunch')" id="cat-brunch" class="px-5 py-2 rounded-full text-xs md:text-sm font-semibold transition-all bg-surface-container text-secondary hover:text-primary">식사 (Brunch)</button>
+                </div>
+                
+                <!-- Search panel -->
+                <div class="relative w-full md:w-80">
+                    <span class="material-symbols-outlined absolute left-3 top-1/2 transform -translate-y-1/2 text-on-surface-variant text-xl">search</span>
+                    <input type="text" id="menu-search-input" onkeyup="searchMenu()" placeholder="메뉴 이름, 설명, 알레르기 검색..." class="w-full pl-10 pr-9 py-2 bg-surface-container-low border border-outline-variant/40 rounded-lg text-sm text-on-surface focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-on-surface-variant/60" />
+                    <!-- Input clear button -->
+                    <button onclick="clearSearch()" id="clear-search-btn" class="absolute right-3 top-1/2 transform -translate-y-1/2 text-on-surface-variant hover:text-primary hidden focus:outline-none">
+                        <span class="material-symbols-outlined text-base">close</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Dynamic Menu Grid -->
+            <div id="full-menu-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dynamically populated via script -->
+            </div>
+            
+            <div id="no-menu-results" class="hidden text-center py-16 flex flex-col items-center gap-4">
+                <span class="material-symbols-outlined text-5xl text-outline font-light">info</span>
+                <p class="font-serif text-lg text-secondary">검색어와 관련된 메뉴를 찾을 수 없습니다.</p>
+                <p class="text-xs text-on-surface-variant">다른 단어를 입력하거나 다른 카테고리를 선택해 보세요.</p>
+            </div>
+        </section>
+
+        <!-- Space Reservation Form Panel -->
+        <section id="reservation" class="w-full bg-surface-container/50 py-24 px-5 flex flex-col items-center">
+            <div class="w-full max-w-3xl bg-surface-container-lowest p-8 md:p-12 rounded-2xl border border-outline-variant/30 shadow-md">
+                <div class="flex flex-col items-center text-center mb-10">
+                    <span class="material-symbols-outlined text-primary text-4xl mb-4 font-light">room_service</span>
+                    <h2 class="font-serif text-2xl md:text-3xl text-primary font-medium">소담 테이블 &amp; 공간 대여 예약</h2>
+                    <p class="text-xs md:text-sm text-on-surface-variant mt-2 max-w-md">
+                        오후의 따뜻한 여유를 위해 원하시는 자리 및 소소한 모임을 위한 공간 대여 예약을 신청해 보세요.
+                    </p>
+                </div>
+
+                <!-- Reservation State Indicator -->
+                <div id="active-reservation-indicator" class="hidden mb-8 p-5 bg-primary-fixed/80 border border-primary-container/40 rounded-xl flex items-center justify-between flex-wrap gap-4">
+                    <div class="flex items-start gap-3">
+                        <span class="material-symbols-outlined text-primary text-2xl">published_with_changes</span>
+                        <div class="text-left">
+                            <h4 class="font-serif text-base font-bold text-on-primary-fixed">이미 예정된 예약이 있습니다.</h4>
+                            <p id="reservation-summary-text" class="text-xs text-on-primary-fixed-variant mt-1">예약일: -</p>
+                        </div>
+                    </div>
+                    <button class="px-4 py-2 border border-error text-error text-xs font-bold rounded-lg hover:bg-error/10 transition-all" onclick="cancelReservation()">
+                        예약 취소
+                    </button>
+                </div>
+
+                <!-- Form -->
+                <form id="reservation-form" onsubmit="handleReservationSubmit(event)" class="space-y-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2" for="res-name">예약자 성함 *</label>
+                            <input type="text" id="res-name" required class="w-full p-3 bg-surface-container-low border border-outline-variant/40 rounded-lg text-sm text-on-surface focus:ring-1 focus:ring-primary focus:border-primary" placeholder="성함을 입력하세요" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2" for="res-phone">연락처 *</label>
+                            <input type="tel" id="res-phone" required class="w-full p-3 bg-surface-container-low border border-outline-variant/40 rounded-lg text-sm text-on-surface focus:ring-1 focus:ring-primary focus:border-primary" placeholder="010-0000-0000" />
+                        </div>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div>
+                            <label class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2" for="res-date">예약 날짜 *</label>
+                            <input type="date" id="res-date" required class="w-full p-3 bg-surface-container-low border border-outline-variant/40 rounded-lg text-sm text-on-surface focus:ring-1 focus:ring-primary focus:border-primary" />
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2" for="res-time">예약 시간 *</label>
+                            <select id="res-time" required class="w-full p-3 bg-surface-container-low border border-outline-variant/40 rounded-lg text-sm text-on-surface focus:ring-1 focus:ring-primary focus:border-primary">
+                                <option value="11:00">오전 11:00</option>
+                                <option value="12:30">오후 12:30</option>
+                                <option value="14:00">오후 02:00</option>
+                                <option value="15:30">오후 03:30</option>
+                                <option value="17:00">오후 05:00</option>
+                                <option value="18:30">오후 06:30</option>
+                                <option value="20:00">오후 08:00</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2" for="res-guests">인원 수 *</label>
+                            <select id="res-guests" required class="w-full p-3 bg-surface-container-low border border-outline-variant/40 rounded-lg text-sm text-on-surface focus:ring-1 focus:ring-primary focus:border-primary">
+                                <option value="1">1인 (개인석)</option>
+                                <option value="2" selected>2인 (권장)</option>
+                                <option value="3">3인</option>
+                                <option value="4">4인</option>
+                                <option value="단체">5인 이상 (공간 대여 문의)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2">원하시는 공간 선택</label>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                            <label class="flex items-center gap-3 p-3 border border-outline-variant/40 rounded-lg bg-surface-container-low hover:bg-surface-container/60 cursor-pointer">
+                                <input type="radio" name="res-space" value="창가석" checked class="text-primary focus:ring-primary" />
+                                <span class="text-sm font-semibold text-on-surface">햇살 가득 창가석</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 border border-outline-variant/40 rounded-lg bg-surface-container-low hover:bg-surface-container/60 cursor-pointer">
+                                <input type="radio" name="res-space" value="아날로그 다락방" class="text-primary focus:ring-primary" />
+                                <span class="text-sm font-semibold text-on-surface">아날로그 다락방</span>
+                            </label>
+                            <label class="flex items-center gap-3 p-3 border border-outline-variant/40 rounded-lg bg-surface-container-low hover:bg-surface-container/60 cursor-pointer">
+                                <input type="radio" name="res-space" value="전체 렌탈" class="text-primary focus:ring-primary" />
+                                <span class="text-sm font-semibold text-on-surface">팀 단위 공간 대여</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-secondary uppercase tracking-widest mb-2" for="res-memo">추가 요청사항</label>
+                        <textarea id="res-memo" rows="3" class="w-full p-3 bg-surface-container-low border border-outline-variant/40 rounded-lg text-sm text-on-surface placeholder:text-on-surface-variant/50 focus:ring-1 focus:ring-primary focus:border-primary" placeholder="특별히 조용한 좌석, 아기 의자, 알레르기 관련 세부 사항이 있으신 경우 작성해 주세요."></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-primary text-on-primary py-4 rounded-lg font-serif font-bold tracking-wide hover:bg-primary-container transition-all shadow-md flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-xl">calendar_month</span> 예약 양식 전송하기
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <!-- Guest Book & Feed Section -->
+        <section id="guestbook" class="w-full max-w-container-max px-5 py-24 flex flex-col items-center">
+            <h2 class="font-serif text-3xl md:text-4xl text-primary font-medium text-center mb-2">소담 방명록</h2>
+            <p class="text-sm md:text-base text-on-surface-variant text-center mb-12">소담에 불어온 아늑한 바람과 느슨했던 순간의 기록들입니다.</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 w-full">
+                <!-- Submit reviews card -->
+                <div class="lg:col-span-4 bg-surface-container-low p-6 rounded-xl border border-outline-variant/20 self-start">
+                    <h3 class="font-serif text-lg text-primary font-medium mb-4">이야기 한 조각 얹기</h3>
+                    <form onsubmit="handleReviewSubmit(event)" id="review-form" class="space-y-4">
+                        <div>
+                            <input type="text" id="rev-name" required placeholder="이름 (또는 닉네임)" class="w-full p-3 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-xs md:text-sm text-on-surface focus:ring-1 focus:ring-primary focus:border-primary" />
+                        </div>
+                        
+                        <!-- Star select -->
+                        <div>
+                            <span class="block text-[11px] font-bold text-secondary uppercase tracking-widest mb-1">인상 깊었던 정도</span>
+                            <div class="flex gap-1" id="star-select-box">
+                                <button type="button" onclick="selectStarFeedback(1)" class="star-btn focus:outline-none text-2xl text-primary-fixed">★</button>
+                                <button type="button" onclick="selectStarFeedback(2)" class="star-btn focus:outline-none text-2xl text-primary-fixed">★</button>
+                                <button type="button" onclick="selectStarFeedback(3)" class="star-btn focus:outline-none text-2xl text-primary-fixed">★</button>
+                                <button type="button" onclick="selectStarFeedback(4)" class="star-btn focus:outline-none text-2xl text-primary-fixed">★</button>
+                                <button type="button" onclick="selectStarFeedback(5)" class="star-btn focus:outline-none text-2xl text-primary-fixed">★</button>
+                            </div>
+                        </div>
+
+                        <div>
+                            <textarea id="rev-message" required rows="4" placeholder="따뜻한 사연, 혹은 디저트 후기를 소담히 남겨주세요." class="w-full p-3 bg-surface-container-lowest border border-outline-variant/30 rounded-lg text-xs md:text-sm text-on-surface focus:ring-1 focus:ring-primary focus:border-primary placeholder:text-on-surface-variant/50"></textarea>
+                        </div>
+                        
+                        <button type="submit" class="w-full py-3 bg-primary text-on-primary rounded-lg text-xs font-bold tracking-wider hover:bg-primary-container transition-all flex items-center justify-center gap-2">
+                            <span class="material-symbols-outlined text-sm">edit_note</span> 소중한 글 남기기
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Reviews lists -->
+                <div class="lg:col-span-8 flex flex-col gap-6">
+                    <div id="reviews-feed-grid" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Loaded locally or via default arrays -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location Maps and details -->
+        <section id="maps" class="w-full bg-surface-container-low py-20 px-5 flex flex-col items-center">
+            <div class="w-full max-w-container-max grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+                
+                <!-- Map representation with elegant vector placeholder -->
+                <div class="lg:col-span-7 bg-surface-container-lowest rounded-xl p-4 border border-outline-variant/30 shadow-sm relative overflow-hidden h-[340px] md:h-[400px] flex items-center justify-center">
+                    <!-- Vector Clean Map Design -->
+                    <div class="absolute inset-0 bg-[#fbf9f6] opacity-90 p-6 flex flex-col justify-between">
+                        <!-- Simulated Grid Lines -->
+                        <div class="absolute inset-0 grid grid-cols-6 grid-rows-6 pointer-events-none opacity-25">
+                            <div class="border-r border-dashed border-outline-variant"></div>
+                            <div class="border-r border-dashed border-outline-variant"></div>
+                            <div class="border-r border-dashed border-outline-variant"></div>
+                            <div class="border-r border-dashed border-outline-variant"></div>
+                            <div class="border-r border-dashed border-outline-variant"></div>
+                            <div class="border-b border-dashed border-outline-variant"></div>
+                        </div>
+                        
+                        <!-- River/Path -->
+                        <svg class="absolute inset-0 w-full h-full opacity-40 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M-10,250 C120,240 200,100 450,120 S600,320 810,300" fill="none" stroke="#bdc787" stroke-width="32" stroke-linecap="round"></path>
+                            <path d="M150,-10 C160,120 280,180 300,450" fill="none" stroke="#eae7e7" stroke-width="12"></path>
+                            <path d="M-10,80 L800,90" fill="none" stroke="#eae7e7" stroke-width="10"></path>
+                        </svg>
+
+                        <!-- Street Name overlays -->
+                        <span class="absolute font-sans text-[10px] text-secondary font-bold tracking-widest select-none rotate-6 left-12 top-16">경의선 숲길 삼거리</span>
+                        <span class="absolute font-sans text-[10px] text-secondary font-bold tracking-widest select-none -rotate-12 left-[40%] bottom-24">소담한 길</span>
+
+                        <!-- Main Pin Marker -->
+                        <div class="absolute left-1/2 top-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10 flex flex-col items-center">
+                            <div class="px-3 py-1.5 bg-primary text-on-primary rounded-lg text-xs font-serif font-bold shadow-md flex items-center gap-1 select-none animate-bounce">
+                                <span class="material-symbols-outlined text-xs text-primary-fixed">local_cafe</span> 소담한 디저트
+                            </div>
+                            <div class="w-2.5 h-2.5 bg-primary rounded-full border-2 border-white shadow-md mt-1"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info description Column -->
+                <div class="lg:col-span-5 flex flex-col text-left gap-6">
+                    <span class="font-serif text-[11px] font-bold text-primary tracking-widest uppercase">찾아오시는 길 • DIRECTIONS</span>
+                    <h2 class="font-serif text-3xl text-primary font-medium leading-tight">소담의 쉼 공간으로 오시는 길</h2>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-xl mt-1">pin_drop</span>
+                            <div>
+                                <span class="block font-sans text-xs text-secondary font-bold">도로명 주소</span>
+                                <span class="text-sm md:text-base font-semibold text-on-surface">서울특별시 마포구 소담로 34 (연남동) 1층</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-xl mt-1">schedule</span>
+                            <div>
+                                <span class="block font-sans text-xs text-secondary font-bold">운영 시간 및 정보</span>
+                                <span class="text-sm md:text-base font-semibold text-on-surface">매주 수요일 - 일요일 11:00 - 21:00</span>
+                                <span class="block text-xs text-on-surface-variant font-light mt-1">* 매주 월요일, 화요일은 신선한 효모 배양 및 정기 휴무입니다.</span>
+                            </div>
+                        </div>
+
+                        <div class="flex items-start gap-3">
+                            <span class="material-symbols-outlined text-primary text-xl mt-1">call</span>
+                            <div>
+                                <span class="block font-sans text-xs text-secondary font-bold">예약 및 대관 문의</span>
+                                <span class="text-sm md:text-base font-semibold text-on-surface">02-1234-5678</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Copy address action button combo -->
+                    <button onclick="copyAddressToClipboard()" class="w-full md:w-auto px-6 py-3 border border-primary text-primary hover:bg-primary hover:text-on-primary rounded-lg text-sm font-semibold tracking-wide transition-all flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-lg">content_copy</span> 주소 복사하기
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Interactive Item Detail Modal -->
+    <div id="item-detail-modal" class="fixed inset-0 z-[80] overflow-hidden pointer-events-none transition-all duration-300 transform opacity-0 flex justify-center items-center p-4">
+        <!-- Backdrop curtain -->
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300 modal-backdrop"></div>
+        
+        <!-- Modal Card Content -->
+        <div class="relative bg-surface rounded-2xl w-full max-w-lg shadow-2xl p-6 md:p-8 transform scale-95 transition-transform duration-300 md:max-h-[90vh] overflow-y-auto flex flex-col gap-6 select-none modal-card">
+            <!-- Close button -->
+            <button onclick="closeItemDetail()" class="absolute right-4 top-4 text-on-surface-variant hover:text-primary transition-colors focus:outline-none">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <div id="modal-content-area" class="space-y-4">
+                <!-- Javascript will render details dynamically -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer from JSON layout -->
+    <footer class="w-full bg-surface-container py-12 px-5 flex flex-col items-center gap-6 text-center select-none">
+        <div class="flex items-center gap-2.5">
+            <div class="w-7 h-7 rounded-full bg-outline flex items-center justify-center text-on-primary font-serif font-bold text-xs">소</div>
+            <span class="font-serif text-base font-medium text-primary">소담한 디저트</span>
+        </div>
+        
+        <div class="flex flex-wrap justify-center gap-x-6 gap-y-2 text-xs md:text-sm font-semibold text-secondary">
+            <button onclick="openPolicyModal('terms')" class="hover:text-primary transition-all">이용약관</button>
+            <button onclick="openPolicyModal('privacy')" class="hover:text-primary transition-all">개인정보처리방침</button>
+            <a href="#maps" class="hover:text-primary transition-all">오시는 길</a>
+        </div>
+
+        <p class="text-xs text-on-surface-variant font-light leading-relaxed">
+            © 2024 소담한 디저트. All rights reserved. <br/>
+            이 웹페이지는 소담한 디저트의 가상 비즈니스를 시뮬레이션한 포트폴리오입니다.
+        </p>
+    </footer>
+
+    <!-- Policy / Terms Modal -->
+    <div id="policy-modal" class="fixed inset-0 z-[110] overflow-hidden pointer-events-none transition-all duration-300 transform opacity-0 flex justify-center items-center p-4">
+        <div class="absolute inset-0 bg-black/60 backdrop-blur-sm opacity-0 transition-opacity duration-300 modal-backdrop"></div>
+        <div class="relative bg-surface rounded-2xl w-full max-w-lg shadow-2xl p-6 md:p-8 transform scale-95 transition-transform duration-300 overflow-y-auto max-h-[80vh] flex flex-col gap-6 modal-card">
+            <button onclick="closePolicyModal()" class="absolute right-4 top-4 text-on-surface-variant hover:text-primary focus:outline-none">
+                <span class="material-symbols-outlined text-2xl">close</span>
+            </button>
+            <div>
+                <h3 id="policy-title" class="font-serif text-xl font-medium text-primary mb-4">이용약관</h3>
+                <div id="policy-body" class="text-xs md:text-sm text-on-surface-variant leading-relaxed space-y-3 overflow-y-auto pr-2 max-h-[50vh]">
+                    <!-- Policy text -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Core Javascript system -->
+    <script>
+        // Whole Menu Data
+        const MENU_DATA = [
+            {
+                id: 'drink-matcha',
+                category: 'drink',
+                name: '제주 말차 크림 라떼',
+                price: 7500,
+                desc: '제주산 유기농 말차 파우더와 소담 수제 비법 생크림의 부드롭고 달콤쌉싸름한 맛.',
+                img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuD_5a_1fkzryLtkFExssgW3AVv7oqR3sxu58gS5HNJ0H2Z9w5w5wjaEAG9Q-IkuiRUpuTHTnQWxnIOpsrJTHG6z6NUjLSbB7IbEpaWp-PY9v2TtUaJ_EWLJrOroXMn1tDnfy_fzXyB8eGGPAnJIn9XKRZem6iWuDmJX2pkPvhFpYvi3VWoKtdQBdRc4lIbhtlMIWpoZ_9RTxGCecYUy9i8fBhJb8ZXG2i11HEsOZO3bX6u8fDpTORN9ZETKUNhXMCb81dGByJ5c8PM',
+                allergen: '우유함유',
+                kcal: '320kcal'
+            },
+            {
+                id: 'food-toast',
+                category: 'brunch',
+                name: '계절 과일 사워도우 토스트',
+                price: 8800,
+                desc: '천연발효 사워도우 위에 가볍고 부드러운 수제 크림치즈와 제철 유기농 슬라이스 과일 조합.',
+                img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuAqpwG69Jc9cJEH7de9f6oQrSaz90itXKFnDObEoOP1bgHz8aVkC6cN0jmOhKCp10fSu27BUMgeP70OmrHH3lPEhJ7kx2HjTJZg5RKMctcnG48lI0h0FnFrUk34Ec92OGifk5oPN9kOVSrFHP7aJKijG57YUYs-qLWGaMTSD_-LfVRngyEB1eT7sZDmzRh4T-K9qOs0gXnjlhz1YX5wG5K1PLJERr-MG11lCnnXx1iVWcx7xx8LWISvghR3gVNPhw4_1vWEbBAMr09W',
+                allergen: '밀, 우유, 꿀 함유',
+                kcal: '410kcal'
+            },
+            {
+                id: 'dessert-cake',
+                category: 'dessert',
+                name: '시그니처 플라워 우유 케이크',
+                price: 14000,
+                desc: '한 모금 머금으면 녹아나듯 부드러운 순수 우유 크림과 식용 식물의 꽃잎 데코레이션 케이크.',
+                img: 'https://lh3.googleusercontent.com/aida-public/AB6AXuA1HdaR43j7s1xqgWlMBg3wcD2bMFecBVbliEDVUkHLyrmBqcmDYi7QCx6XvxFiR9pPC4bAhLNtn38m0ymtipoBMQA7N1IrqdtJeCFJPUroZKQE-y4szBWMdCkKHUdrZXPMcIEAMmIy-rVQTGvXH28Xzc2dYryfQphkD7DPVMMz4r5tRD3UNawFfdHQRKFoBK4LjV5gwHDvZJWiqaxfY76Ii6N57Kuc1WIeqL40pWJdhjxZ1IVxLpSeidQi55Bo65faon5HYFZY2q_J',
+                allergen: '밀, 우유, 계란 함유',
+                kcal: '480kcal'
+            },
+            {
+                id: 'drink-einspanner',
+                category: 'drink',
+                name: '에인슈페너 바닐라',
+                price: 6800,
+                desc: '진한 더치 아메리카노 바닥 위에 묵직한 바닐라 향 아날로그 크림을 담아내었습니다.',
+                img: 'https://images.unsplash.com/photo-1577968897966-3d4325b36b61?auto=format&fit=crop&q=80&w=700',
+                allergen: '우유 함유',
+                kcal: '240kcal'
+            },
+            {
+                id: 'dessert-scone',
+                category: 'dessert',
+                name: '무화과 통밀 스콘',
+                price: 5200,
+                desc: '통밀의 풍부한 식이섬유 식감과 건조 무화과의 쫄깃한 식감을 고소한 무염 버터와 함께 제공.',
+                img: 'https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&q=80&w=700',
+                allergen: '밀, 우유 함유',
+                kcal: '280kcal'
+            },
+            {
+                id: 'dessert-tart',
+                category: 'dessert',
+                name: '산딸기 가나슈 타르트',
+                price: 7800,
+                desc: '진한 다크 초콜릿 벨기에 가나슈 필링과 상큼함이 터지는 생 산딸기의 고급스러운 타르트.',
+                img: 'https://images.unsplash.com/photo-1519869325930-281384150729?auto=format&fit=crop&q=80&w=700',
+                allergen: '밀, 우유, 대두 함유',
+                kcal: '380kcal'
+            }
+        ];
+
+        // Default initial reviews
+        const DEFAULT_REVIEWS = [
+            {
+                name: "희원",
+                rating: 5,
+                message: "따뜻한 가을 햇살에 말차 한 잔 하니 일상의 피로가 녹는 느낌이에요. 식용 꽃이 올라간 우유 케이크는 너무 아름다웠고 맛 또한 아주 깊었습니다.",
+                date: "2026-06-05"
+            },
+            {
+                name: "민석",
+                rating: 5,
+                message: "사워도우 토스트의 쫄깃한 빵에 크림치즈와 복숭아가 기막히게 잘 어울려요! 연남동에 올 때마다 들러 쉬어가는 최애 방앗간입니다.",
+                date: "2026-06-01"
+            }
+        ];
+
+        // Global states
+        let cart = [];
+        let currentFilterCategory = 'all';
+        let feedbackStarSelected = 5;
+
+        // On Load setup
+        window.addEventListener('DOMContentLoaded', () => {
+            initApp();
+        });
+
+        function initApp() {
+            // Setup Cart Local Storage
+            const savedCart = localStorage.getItem('sodam_cart');
+            if (savedCart) {
+                cart = JSON.parse(savedCart);
+                updateCartStatus();
+            }
+
+            // Setup Reservation State Indicator
+            const savedReservation = localStorage.getItem('sodam_reservation');
+            if (savedReservation) {
+                showActiveReservationBanner(JSON.parse(savedReservation));
+            }
+
+            // Load Reviews from local or default
+            renderReviewsFeed();
+
+            // Render Menu list
+            renderMenuGrid();
+
+            // Set default date picker min limitation to today offset
+            const dateInput = document.getElementById('res-date');
+            if (dateInput) {
+                const today = new Date().toISOString().split('T')[0];
+                dateInput.min = today;
+            }
+
+            // Setup Global Side Drawers trigger
+            setupDrawersInteractivity();
+        }
+
+        // Toggle Drawers utilities
+        function setupDrawersInteractivity() {
+            const backdropElements = document.querySelectorAll('.drawer-backdrop');
+            const navDrawer = document.getElementById('mobile-nav-drawer');
+            const cartDrawer = document.getElementById('cart-drawer');
+
+            // Open Mobile Menu
+            document.getElementById('mobile-menu-btn').addEventListener('click', () => {
+                toggleDrawerState(navDrawer, true);
+            });
+            document.getElementById('close-mobile-nav').addEventListener('click', () => {
+                toggleDrawerState(navDrawer, false);
+            });
+
+            // Open Cart Drawer
+            document.getElementById('open-cart-btn').addEventListener('click', () => {
+                toggleDrawerState(cartDrawer, true);
+            });
+            document.getElementById('close-cart').addEventListener('click', () => {
+                toggleDrawerState(cartDrawer, false);
+            });
+
+            // Closing drawer on clicking Backdrop curtains
+            backdropElements.forEach(backdrop => {
+                backdrop.addEventListener('click', (e) => {
+                    const parentDrawer = e.target.closest('.fixed');
+                    toggleDrawerState(parentDrawer, false);
+                });
+            });
+
+            // Close drawers on anchor click
+            document.querySelectorAll('#mobile-nav-drawer nav a').forEach(link => {
+                link.addEventListener('click', () => {
+                    toggleDrawerState(navDrawer, false);
+                });
+            });
+        }
+
+        function toggleDrawerState(drawerUnit, isOpen) {
+            const content = drawerUnit.querySelector('.drawer-content');
+            const backdrop = drawerUnit.querySelector('.drawer-backdrop');
+
+            if (isOpen) {
+                drawerUnit.classList.remove('pointer-events-none');
+                backdrop.classList.add('opacity-100');
+                if (content.classList.contains('right-0')) {
+                    content.classList.remove('translate-x-full');
+                } else {
+                    content.classList.remove('-translate-x-full');
+                }
+            } else {
+                drawerUnit.classList.add('pointer-events-none');
+                backdrop.classList.remove('opacity-100');
+                if (content.classList.contains('right-0')) {
+                    content.classList.add('translate-x-full');
+                } else {
+                    content.classList.add('-translate-x-full');
+                }
+            }
+        }
+
+        // Toast trigger
+        function showNotificationToast(msg, isSuccess = true) {
+            const toast = document.getElementById('toast');
+            const icon = document.getElementById('toast-icon');
+            const message = document.getElementById('toast-message');
+
+            icon.innerText = isSuccess ? 'check_circle' : 'info';
+            message.innerText = msg;
+
+            toast.classList.remove('opacity-0', 'pointer-events-none');
+            toast.classList.add('opacity-100');
+
+            setTimeout(() => {
+                toast.classList.remove('opacity-100');
+                toast.classList.add('opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        // Render Menu explorer grid matching state
+        function renderMenuGrid(itemsToRender = MENU_DATA) {
+            const grid = document.getElementById('full-menu-grid');
+            const emptyResult = document.getElementById('no-menu-results');
+            grid.innerHTML = '';
+
+            if (itemsToRender.length === 0) {
+                grid.classList.add('hidden');
+                emptyResult.classList.remove('hidden');
+                return;
+            }
+
+            grid.classList.remove('hidden');
+            emptyResult.classList.add('hidden');
+
+            itemsToRender.forEach(item => {
+                const card = document.createElement('div');
+                card.className = "bg-surface-container-low/70 border border-outline-variant/20 rounded-xl overflow-hidden shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 flex flex-col cursor-pointer select-none group";
+                card.setAttribute('onclick', `openItemDetail('${item.id}')`);
+                card.innerHTML = `
+                    <div class="h-48 overflow-hidden relative">
+                        <img src="${item.img}" referrerpolicy="no-referrer" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-115 transition-transform duration-500" />
+                        <div class="absolute top-3 left-3 px-2 py-1 bg-white/80 backdrop-blur-sm rounded text-[10px] uppercase font-bold tracking-wider text-primary">
+                            ${item.category === 'drink' ? '음료' : item.category === 'dessert' ? '디저트' : '브런치'}
+                        </div>
+                    </div>
+                    <div class="p-6 flex-1 flex flex-col justify-between gap-4">
+                        <div>
+                            <h3 class="font-serif text-lg font-bold text-primary mb-1.5">${item.name}</h3>
+                            <p class="text-xs md:text-sm text-on-surface-variant font-light line-clamp-2 leading-relaxed">${item.desc}</p>
+                        </div>
+                        <div class="flex justify-between items-center sm:gap-2">
+                            <span class="font-serif text-base font-bold text-primary">₩ ${item.price.toLocaleString()}</span>
+                            <button onclick="event.stopPropagation(); addItemToCart('${item.id}');" class="px-4 py-2 bg-primary text-on-primary hover:bg-primary-container text-xs font-semibold rounded-md transition-colors flex items-center gap-1.5">
+                                <span class="material-symbols-outlined text-sm">add_shopping_cart</span> 바구니
+                            </button>
+                        </div>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        // Category menu switching filters folder tags
+        function filterMenu(category) {
+            currentFilterCategory = category;
+            
+            // Toggle active status
+            const categoryButtons = document.querySelectorAll('#menu-explorer button[id^="cat-"]');
+            categoryButtons.forEach(btn => {
+                if (btn.id === `cat-${category}`) {
+                    btn.className = "px-5 py-2 rounded-full text-xs md:text-sm font-semibold transition-all bg-primary text-on-primary";
+                } else {
+                    btn.className = "px-5 py-2 rounded-full text-xs md:text-sm font-semibold transition-all bg-surface-container text-secondary hover:text-primary";
+                }
+            });
+
+            executeCombinedMenuSearch();
+        }
+
+        // Combined live Search filter logic
+        function searchMenu() {
+            const clearBtn = document.getElementById('clear-search-btn');
+            const searchVal = document.getElementById('menu-search-input').value.trim();
+            if (searchVal.length > 0) {
+                clearBtn.classList.remove('hidden');
+            } else {
+                clearBtn.classList.add('hidden');
+            }
+            executeCombinedMenuSearch();
+        }
+
+        function clearSearch() {
+            const searchInput = document.getElementById('menu-search-input');
+            searchInput.value = '';
+            document.getElementById('clear-search-btn').classList.add('hidden');
+            executeCombinedMenuSearch();
+        }
+
+        function executeCombinedMenuSearch() {
+            const searchTerm = document.getElementById('menu-search-input').value.trim().toLowerCase();
+            
+            const results = MENU_DATA.filter(item => {
+                // Category validation matching check
+                const isCatValid = currentFilterCategory === 'all' || item.category === currentFilterCategory;
+                
+                // Text input matching check
+                const isTextValid = !searchTerm || 
+                                    item.name.toLowerCase().includes(searchTerm) || 
+                                    item.desc.toLowerCase().includes(searchTerm) ||
+                                    item.allergen.toLowerCase().includes(searchTerm);
+
+                return isCatValid && isTextValid;
+            });
+
+            renderMenuGrid(results);
+        }
+
+        // Detailed Drawer/Modal Overlay Actions
+        function openItemDetail(itemId) {
+            const item = MENU_DATA.find(i => i.id === itemId);
+            if (!item) return;
+
+            const modal = document.getElementById('item-detail-modal');
+            const content = document.getElementById('modal-content-area');
+            const card = modal.querySelector('.modal-card');
+            const backdrop = modal.querySelector('.modal-backdrop');
+
+            content.innerHTML = `
+                <div class="h-56 md:h-64 rounded-lg overflow-hidden relative mb-4">
+                    <img src="${item.img}" referrerpolicy="no-referrer" alt="${item.name}" class="w-full h-full object-cover" />
+                </div>
+                <div>
+                     <span class="inline-block px-2.5 py-0.5 bg-primary-fixed text-primary text-[10px] font-extrabold uppercase rounded mb-2">
+                        ${item.category === 'drink' ? '음료' : item.category === 'dessert' ? '디저트' : '브런치'}
+                     </span>
+                     <h3 class="font-serif text-2xl font-bold text-primary mb-2">${item.name}</h3>
+                     <p class="text-xs md:text-sm text-on-surface-variant font-light leading-relaxed mb-4">${item.desc}</p>
+                </div>
+                <div class="bg-surface-container rounded-lg p-4 space-y-2">
+                    <div class="flex justify-between text-xs text-secondary">
+                        <span>영양 성분 &amp; 칼로리</span>
+                        <span class="font-bold text-on-surface">${item.kcal}</span>
+                    </div>
+                    <div class="flex justify-between text-xs text-secondary border-t border-outline-variant/30 pt-2">
+                        <span>알레르기 유발 물질</span>
+                        <span class="font-bold text-on-surface text-right">${item.allergen}</span>
+                    </div>
+                </div>
+                <div class="flex justify-between items-center pt-2 gap-4">
+                    <span class="font-serif text-xl font-bold text-primary">₩ ${item.price.toLocaleString()}</span>
+                    <button onclick="addItemToCart('${item.id}'); closeItemDetail();" class="flex-1 bg-primary hover:bg-primary-container text-on-primary py-3 rounded-lg font-serif font-bold hover:shadow-md transition-all flex items-center justify-center gap-2">
+                        <span class="material-symbols-outlined text-lg">add_shopping_cart</span> 바구니 담기
+                    </button>
+                </div>
+            `;
+
+            modal.classList.remove('pointer-events-none');
+            backdrop.classList.add('opacity-100');
+            card.classList.remove('scale-95');
+            modal.classList.add('opacity-100');
+        }
+
+        function closeItemDetail() {
+            const modal = document.getElementById('item-detail-modal');
+            const card = modal.querySelector('.modal-card');
+            const backdrop = modal.querySelector('.modal-backdrop');
+
+            modal.classList.add('pointer-events-none');
+            backdrop.classList.remove('opacity-100');
+            card.classList.add('scale-95');
+            modal.classList.remove('opacity-100');
+        }
+
+        // Dynamic Cart drawer handlers
+        function addItemToCart(itemId) {
+            const item = MENU_DATA.find(i => i.id === itemId);
+            const existInCart = cart.find(c => c.itemId === itemId);
+
+            if (existInCart) {
+                existInCart.qty += 1;
+            } else {
+                cart.push({
+                    itemId: itemId,
+                    qty: 1
+                });
+            }
+
+            updateCartStatus();
+            showNotificationToast(`'${item.name}'을 바구니에 담았습니다.`);
+        }
+
+        function changeCartQty(itemId, delta) {
+            const target = cart.find(c => c.itemId === itemId);
+            if (!target) return;
+
+            target.qty += delta;
+            if (target.qty <= 0) {
+                cart = cart.filter(c => c.itemId !== itemId);
+            }
+
+            updateCartStatus();
+        }
+
+        // Cart recalculations and dynamic markup renders
+        function updateCartStatus() {
+            localStorage.setItem('sodam_cart', JSON.stringify(cart));
+            const counter = document.getElementById('cart-counter');
+            const itemsContainer = document.getElementById('cart-items-container');
+            const checkoutBlock = document.getElementById('cart-checkout-section');
+            const emptyBlock = document.getElementById('empty-cart-state');
+
+            // Counter update Badge logic
+            if (cart.length > 0) {
+                const totalQtyCount = cart.reduce((acc, current) => acc + current.qty, 0);
+                counter.innerText = totalQtyCount;
+                counter.classList.remove('scale-0');
+                counter.classList.add('scale-100');
+
+                emptyBlock.classList.add('hidden');
+                checkoutBlock.classList.remove('hidden');
+            } else {
+                counter.classList.remove('scale-100');
+                counter.classList.add('scale-0');
+
+                emptyBlock.classList.remove('hidden');
+                checkoutBlock.classList.add('hidden');
+                itemsContainer.innerHTML = '';
+                itemsContainer.appendChild(emptyBlock);
+                return;
+            }
+
+            // Populate cart item block lists
+            itemsContainer.innerHTML = '';
+            let grossAmount = 0;
+
+            cart.forEach(cartUnit => {
+                const menuItem = MENU_DATA.find(m => m.id === cartUnit.itemId);
+                grossAmount += menuItem.price * cartUnit.qty;
+
+                const itemRow = document.createElement('div');
+                itemRow.className = "flex items-center gap-4 bg-surface-container/30 border border-outline-variant/10 rounded-lg p-3";
+                itemRow.innerHTML = `
+                    <div class="w-16 h-16 rounded-md overflow-hidden bg-surface-container relative shrink-0">
+                        <img src="${menuItem.img}" referrerpolicy="no-referrer" alt="${menuItem.name}" class="w-full h-full object-cover" />
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h4 class="font-serif text-sm font-semibold text-primary truncate">${menuItem.name}</h4>
+                        <span class="text-xs text-on-surface-variant">₩ ${menuItem.price.toLocaleString()}</span>
+                    </div>
+                    <div class="flex items-center border border-outline-variant/40 rounded-lg overflow-hidden shrink-0 select-none bg-surface-container-lowest">
+                        <button onclick="changeCartQty('${cartUnit.itemId}', -1)" class="w-7 h-7 text-xs font-bold text-secondary hover:bg-surface-container font-sans flex items-center justify-center">-</button>
+                        <span class="w-7 text-xs font-bold text-on-surface text-center">${cartUnit.qty}</span>
+                        <button onclick="changeCartQty('${cartUnit.itemId}', 1)" class="w-7 h-7 text-xs font-bold text-secondary hover:bg-surface-container font-sans flex items-center justify-center">+</button>
+                    </div>
+                `;
+                itemsContainer.appendChild(itemRow);
+            });
+
+            // Set total price
+            document.getElementById('cart-total-price').innerText = `₩ ${grossAmount.toLocaleString()}`;
+            
+            // Add Dine takeout toggles
+            const dineInBtn = document.getElementById('order-type-dine');
+            const takeOutBtn = document.getElementById('order-type-take');
+            dineInBtn.addEventListener('click', () => {
+                dineInBtn.className = "flex-1 text-center py-2 text-sm font-semibold rounded-md transition-all bg-surface shadow-sm text-primary";
+                takeOutBtn.className = "flex-1 text-center py-2 text-sm font-semibold rounded-md transition-all text-secondary";
+            });
+            takeOutBtn.addEventListener('click', () => {
+                takeOutBtn.className = "flex-1 text-center py-2 text-sm font-semibold rounded-md transition-all bg-surface shadow-sm text-primary";
+                dineInBtn.className = "flex-1 text-center py-2 text-sm font-semibold rounded-md transition-all text-secondary";
+            });
+
+            // Checkout Event Simulated Actions
+            document.getElementById('checkout-btn').onclick = function() {
+                toggleDrawerState(document.getElementById('cart-drawer'), false);
+                cart = [];
+                updateCartStatus();
+                openItemDetailSimulateCheckout();
+            }
+        }
+
+        // Checkout success simulation card
+        function openItemDetailSimulateCheckout() {
+            const modal = document.getElementById('item-detail-modal');
+            const content = document.getElementById('modal-content-area');
+            const card = modal.querySelector('.modal-card');
+            const backdrop = modal.querySelector('.modal-backdrop');
+
+            content.innerHTML = `
+                <div class="text-center py-6 flex flex-col items-center gap-4">
+                    <span class="material-symbols-outlined text-6xl text-primary font-light animate-bounce">task_alt</span>
+                    <h3 class="font-serif text-2xl font-bold text-primary">주문 요청이 완료되었습니다</h3>
+                    <p class="text-xs md:text-sm text-on-surface-variant max-w-sm leading-relaxed">
+                        소담한 디저트 키친에 가상 주문이 정성스럽게 접수되었습니다. <br/>
+                        포장 수령 및 매장 이용 시 주방에 카운터 스태프를 불러주시면 빠르게 디저트를 준비해 드립니다.
+                    </p>
+                    <div class="w-full bg-surface-container rounded-lg p-4 text-xs font-semibold text-secondary text-left space-y-1">
+                        <div>• 주문 상태: <span class="text-primary">접수 완료 및 준비 중</span></div>
+                        <div>• 주문 영수증: SODAM-VOL-${Math.floor(Math.random() * 90000 + 1000)}</div>
+                    </div>
+                    <button onclick="closeItemDetail();" class="mt-4 px-8 py-3 bg-primary text-on-primary font-bold rounded-lg text-sm tracking-wide shadow-md transition-all w-full">
+                        확인
+                    </button>
+                </div>
+            `;
+
+            modal.classList.remove('pointer-events-none');
+            backdrop.classList.add('opacity-100');
+            card.classList.remove('scale-95');
+            modal.classList.add('opacity-100');
+        }
+
+        // Board reservation flow logic handle
+        function handleReservationSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('res-name').value;
+            const phone = document.getElementById('res-phone').value;
+            const date = document.getElementById('res-date').value;
+            const time = document.getElementById('res-time').value;
+            const guests = document.getElementById('res-guests').value;
+            const memo = document.getElementById('res-memo').value;
+            const selectedSpace = document.querySelector('input[name="res-space"]:checked').value;
+
+            const reservationData = {
+                name, phone, date, time, guests, selectedSpace, memo
+            };
+
+            // Save reservation info locally
+            localStorage.setItem('sodam_reservation', JSON.stringify(reservationData));
+            showActiveReservationBanner(reservationData);
+            
+            // Pop success modal
+            openReservationSimulateModal(reservationData);
+
+            document.getElementById('reservation-form').reset();
+        }
+
+        function showActiveReservationBanner(data) {
+            const banner = document.getElementById('active-reservation-indicator');
+            const text = document.getElementById('reservation-summary-text');
+
+            text.innerText = `예약일자: ${data.date} ${data.time} | 예약 공간: ${data.selectedSpace} | 예약자: ${data.name}님`;
+            
+            banner.classList.remove('hidden');
+        }
+
+        function cancelReservation() {
+            localStorage.removeItem('sodam_reservation');
+            document.getElementById('active-reservation-indicator').classList.add('hidden');
+            showNotificationToast("예약이 정상적으로 취소되었습니다.", false);
+        }
+
+        function openReservationSimulateModal(data) {
+            const modal = document.getElementById('item-detail-modal');
+            const content = document.getElementById('modal-content-area');
+            const card = modal.querySelector('.modal-card');
+            const backdrop = modal.querySelector('.modal-backdrop');
+
+            content.innerHTML = `
+                <div class="text-center py-6 flex flex-col items-center gap-4">
+                    <span class="material-symbols-outlined text-6xl text-primary font-light">table_restaurant</span>
+                    <h3 class="font-serif text-2xl font-bold text-primary">예약 요청서 작성 성공</h3>
+                    <p class="text-xs md:text-sm text-on-surface-variant max-w-sm leading-relaxed">
+                        소담한 마포 하우스 공간 대여 예약 요청이 전송되었습니다. 확인 전화를 통해 자리 지정을 확정해 드립니다.
+                    </p>
+                    <div class="w-full bg-surface-container rounded-lg p-4 text-xs font-semibold text-secondary text-left space-y-1">
+                        <div>• 예약 동거인: ${data.name} 님</div>
+                        <div>• 일시: ${data.date} [${data.time}]</div>
+                        <div>• 지정 구석: ${data.selectedSpace} 지정</div>
+                    </div>
+                    <button onclick="closeItemDetail();" class="mt-4 px-8 py-3 bg-primary text-on-primary font-bold rounded-lg text-sm tracking-wide shadow-md transition-all w-full">
+                        확인
+                    </button>
+                </div>
+            `;
+
+            modal.classList.remove('pointer-events-none');
+            backdrop.classList.add('opacity-100');
+            card.classList.remove('scale-95');
+            modal.classList.add('opacity-100');
+        }
+
+        // Guestbook stars UI toggle
+        function selectStarFeedback(starCount) {
+            feedbackStarSelected = starCount;
+            const starButtons = document.querySelectorAll('#star-select-box button.star-btn');
+            
+            starButtons.forEach((btn, index) => {
+                if (index < starCount) {
+                    btn.className = "star-btn focus:outline-none text-2xl text-primary-fixed";
+                } else {
+                    btn.className = "star-btn focus:outline-none text-2xl text-outline-variant";
+                }
+            });
+        }
+
+        // Guestbook logic
+        function renderReviewsFeed() {
+            const feed = document.getElementById('reviews-feed-grid');
+            feed.innerHTML = '';
+
+            let currentReviewsList = [];
+            const savedReviewsData = localStorage.getItem('sodam_reviews');
+            
+            if (savedReviewsData) {
+                currentReviewsList = JSON.parse(savedReviewsData);
+            } else {
+                currentReviewsList = [...DEFAULT_REVIEWS];
+                localStorage.setItem('sodam_reviews', JSON.stringify(currentReviewsList));
+            }
+
+            currentReviewsList.forEach(review => {
+                const elementCard = document.createElement('div');
+                elementCard.className = "bg-surface-container-lowest p-6 rounded-xl border border-outline-variant/30 text-left flex flex-col justify-between gap-4";
+                
+                // Compile stars representation markup
+                let starsMarkup = '';
+                for (let i = 0; i < 5; i++) {
+                    if (i < review.rating) {
+                        starsMarkup += `<span class="text-xs text-primary-fixed-dim">★</span>`;
+                    } else {
+                        starsMarkup += `<span class="text-xs text-outline-variant/50">★</span>`;
+                    }
+                }
+
+                elementCard.innerHTML = `
+                    <div>
+                        <div class="flex justify-between items-center mb-3">
+                            <span class="font-serif text-sm font-bold text-primary">${review.name}</span>
+                            <div class="flex gap-0.5">${starsMarkup}</div>
+                        </div>
+                        <p class="text-xs md:text-sm text-on-surface-variant font-light leading-relaxed mb-4">${review.message}</p>
+                    </div>
+                    <span class="text-[10px] text-outline font-sans ml-auto">${review.date}</span>
+                `;
+                feed.appendChild(elementCard);
+            });
+        }
+
+        function handleReviewSubmit(e) {
+            e.preventDefault();
+            const name = document.getElementById('rev-name').value.trim();
+            const msg = document.getElementById('rev-message').value.trim();
+
+            const savedReviewsData = localStorage.getItem('sodam_reviews');
+            const currentList = savedReviewsData ? JSON.parse(savedReviewsData) : [...DEFAULT_REVIEWS];
+
+            const today = new Date().toISOString().split('T')[0];
+            const newObject = {
+                name: name,
+                rating: feedbackStarSelected,
+                message: msg,
+                date: today
+            };
+
+            currentList.unshift(newObject); // Prepend to review feeds list
+            localStorage.setItem('sodam_reviews', JSON.stringify(currentList));
+
+            showNotificationToast("방명록이 등록되었습니다. 소중한 의견 감사합니다!");
+            renderReviewsFeed();
+
+            document.getElementById('review-form').reset();
+            selectStarFeedback(5); // Reset stars to default
+        }
+
+        // Copy address with toast feedback
+        function copyAddressToClipboard() {
+            navigator.clipboard.writeText("서울특별시 마포구 소담로 34")
+                .then(() => {
+                    showNotificationToast("도로명 주소가 클립보드에 복사되었습니다.");
+                })
+                .catch(() => {
+                    showNotificationToast("주소 복사에 실패했습니다. 직접 복사해 주세요.", false);
+                });
+        }
+
+        // Terms of services Policy modals handler
+        const POLICY_TEXTS = {
+            terms: {
+                title: "소담한 디저트 이용약관",
+                content: `
+                    <p><strong>제 1 조 (목적)</strong><br/>본 약관은 소담한 디저트 시뮬레이션 웹사이트(이하 '당 사이트')가 제공하는 모든 가상적인 인터랙티브 기능, 공간 예약 시뮬레이터 및 주문 장바구니 경험 등을 사용하는 제반 조건과 규정을 정의하는 데 그 목적이 있습니다.</p>
+                    <p><strong>제 2 조 (효력 및 가상 지향의 한계)</strong><br/>1. 본 사이트 내에서 이뤄지는 모든 장바구니 결제, 주문 접수, 가상 테이블 예약, 별점 등록 및 리뷰 데이터는 전적으로 사용자의 웹 브라우저 로컬 저장소(Local Storage)에서 모의 프로세스로만 작동합니다.<br/>2. 사이트 내에 표기된 상품 실물 발송 또는 정식 오프라인 가맹 예약은 전면 실재하지 않으며, 일체의 실제 금융 거래나 실물 청구는 발생하지 않습니다.</p>
+                    <p><strong>제 3 조 (사용자 정보 저장 정책)</strong><br/>사용자가 작성한 가상 방명록 데이터나 테이블 예약 기록은 프라이버시 원칙에 의거해 외부 클라우드 통신 없이, 오직 해당 사용자 개인 기기의 로컬 저장소에 영구적 혹은 세션 단위로 임시 보관되며 소담한 디저트 서버는 이를 외부에 노출 수집하지 않습니다.</p>
+                `
+            },
+            privacy: {
+                title: "개인정보 처리방침 안내",
+                content: `
+                    <p><strong>1. 수집하는 개인정보의 항목</strong><br/>사용자는 브라우저 상에서 가상 예약 신청, 가물 장바구니 영수증 전송 또는 방명록 작성 시 임의의 성명, 연락처, 사연 텍스트를 기입할 수 있습니다.</p>
+                    <p><strong>2. 개인정보의 지리적 처리 보존 원칙</strong><br/>본 사이트 시스템은 기입된 정보를 중앙집중식 서버에 상향 업로드하지 않습니다. 모든 폼 정보는 브라우저 내부 메모리 및 HTML LocalStorage 객체 기술로만 처리되어 클라이언트 사이드 단말에서만 유지됩니다. 브라우저 쿠키나 로컬 스토리지를 정화 삭제 시 즉각 자동 폐기됩니다.</p>
+                    <p><strong>3. 정보 주체의 권리</strong><br/>사용자는 언제든지 브라우저의 ‘캐시 삭제’ 또는 ‘로컬 스토리지 비우기’ 도구를 이용해 기록된 개인 식별 성명 및 흔적을 자기 주도적으로 완전 삭제할 수 있습니다.</p>
+                `
+            }
+        };
+
+        function openPolicyModal(type) {
+            const modal = document.getElementById('policy-modal');
+            const title = document.getElementById('policy-title');
+            const body = document.getElementById('policy-body');
+            const card = modal.querySelector('.modal-card');
+            const backdrop = modal.querySelector('.modal-backdrop');
+
+            title.innerText = POLICY_TEXTS[type].title;
+            body.innerHTML = POLICY_TEXTS[type].content;
+
+            modal.classList.remove('pointer-events-none');
+            backdrop.classList.add('opacity-100');
+            card.classList.remove('scale-95');
+            modal.classList.add('opacity-100');
+        }
+
+        function closePolicyModal() {
+            const modal = document.getElementById('policy-modal');
+            const card = modal.querySelector('.modal-card');
+            const backdrop = modal.querySelector('.modal-backdrop');
+
+            modal.classList.add('pointer-events-none');
+            backdrop.classList.remove('opacity-100');
+            card.classList.add('scale-95');
+            modal.classList.remove('opacity-100');
+        }
+    </script>
+</body>
+</html>

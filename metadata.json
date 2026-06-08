@@ -1,0 +1,6 @@
+{
+  "name": "소담한 디저트",
+  "description": "정성을 담은 수제 디저트와 계절 음료를 제공하는 도심 속 작은 쉼터, 소담한 디저트의 공식 웹사이트입니다. HTML, CSS, JavaScript로 제작된 독립적이고 수준 높은 정적 사이트입니다.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
